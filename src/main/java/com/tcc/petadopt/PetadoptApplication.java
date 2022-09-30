@@ -1,13 +1,9 @@
 package com.tcc.petadopt;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
-import com.tcc.petadopt.domain.Usuario;
-import com.tcc.petadopt.repositories.UsuarioRepository;
 
 @SpringBootApplication
 @EnableSpringDataWebSupport
@@ -18,7 +14,7 @@ public class PetadoptApplication {
 	}
 
 
-	@Bean
+/** 	@Bean
 	public CommandLineRunner loadData(UsuarioRepository repository) {
     return (args) -> {
 		Usuario usuario = new Usuario();
@@ -28,5 +24,5 @@ public class PetadoptApplication {
         repository.save(usuario);
 		};
 	}
-
+*/
 }

@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.petadopt.domain.Categoria;
-import com.tcc.petadopt.domain.Usuario;
 import com.tcc.petadopt.repositories.CategoriaRepository;
-import com.tcc.petadopt.repositories.UsuarioRepository;
 
 @RestController
 @RequestMapping("/categorias")
@@ -21,8 +19,6 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
 
     @GetMapping
     public List<Categoria> getAll(){
@@ -34,9 +30,9 @@ public class CategoriaController {
         return categoriaRepository.save(categoria);
     }
 
-    @GetMapping("/usuarios")
-    public List<Usuario> getUsuarios(){
-        return usuarioRepository.findAll();
+    @PostMapping
+    public Categoria save(@RequestBody Categoria categoria){
+        return categoriaRepository.save(categoria);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.tcc.petadopt.domain;
+/** package com.tcc.petadopt.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -121,3 +121,4 @@ public class Usuario implements UserDetails {
 	}
 
 }
+**/
