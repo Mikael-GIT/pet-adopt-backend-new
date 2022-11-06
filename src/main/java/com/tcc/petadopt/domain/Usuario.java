@@ -1,124 +1,80 @@
-/** package com.tcc.petadopt.domain;
+package com.tcc.petadopt.domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.Date;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Data;
 
 @Entity
-public class Usuario implements UserDetails {
+@Data
+public class Usuario {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String nome;
-	private String email;
-	private String senha;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Perfil> perfis = new ArrayList<>();
+    private String nome;
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
+    private String idade;
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+    private String login;
 
-	public Long getId() {
-		return id;
-	}
+    private String cpf;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String email;
 
-	public String getNome() {
-		return nome;
-	}
+    private String senha;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    private String telefone;
 
-	public String getEmail() {
-		return email;
-	}
+    private String profissao;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    private String linkFacebook;
 
-	public String getSenha() {
-		return senha;
-	}
+    private String linkInstagram;
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    private Boolean possuiOuPossuiuPets;
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.perfis;
-	}
+    private String motivoAdocao;
 
-	@Override
-	public String getPassword() {
-		return this.senha;
-	}
+    private String numResidentesDomicilio;
 
-	@Override
-	public String getUsername() {
-		return this.email;
-	}
+    private Boolean residentesConcordamAdocao;
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+    private Boolean teraLivreAcessoAosComodos;
+    
+    private Boolean possuiBebeOuPretende;
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
+    private Boolean residentesPossuiAlergia;
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+    private Boolean isCastrados;
 
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+    private Boolean concordaManterInformados;
+
+    private Boolean aceitaVisitasPosAdocao;
+
+    private Boolean adotouoOuDoouUmPet;
+
+    private String tipoResidencia;
+
+    private String ambientePropicioParaCriacao;
+
+
+    @Embedded
+    private Endereco endereco;
+
+    @OneToOne(mappedBy = "usuario")
+    private Adocao adocao;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao;
 
 }
-**/
