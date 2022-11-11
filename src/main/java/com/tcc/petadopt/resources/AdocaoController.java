@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tcc.petadopt.domain.Adocao;
 import com.tcc.petadopt.domain.Email;
 import com.tcc.petadopt.domain.dtos.AdocaoPostDTO;
-import com.tcc.petadopt.domain.dtos.EmailDto;
 import com.tcc.petadopt.repositories.AdocaoRepository;
 import com.tcc.petadopt.repositories.AnimalRepository;
 import com.tcc.petadopt.repositories.UsuarioRepository;
@@ -48,6 +47,11 @@ public class AdocaoController {
         return adocaoRepository.findById(id).orElseThrow(() -> new Exception("Não foi possível recuperar dados"));
     }
 
+    @GetMapping("{id}/adoptions")
+    public List<Adocao> getAdoptionsByUser(@PathVariable Integer id) throws Exception{
+        return adocaoRepository.findAllAdoptionsByUserId(id);
+    }
+
     @PostMapping
     public Adocao save(@RequestBody AdocaoPostDTO dto) throws Exception{
         Adocao adocao = dto.toModel(dto, animalRepository, usuarioRepository);
@@ -56,7 +60,7 @@ public class AdocaoController {
         email.setEmailTo("raphael.mathias@unigranrio.br");
         email.setOwnerRef("Raphael");
         email.setSubject("Solicitação de adoção - PET ADOPT APP");
-        email.setText("Olá " + adocao.getUsuario().getNome() + " recebemos seu pedido de adoção do nosso amado " + adocao.getAnimal().getNome() + " ficamos muito felizes com seu pedido."
+        email.setText("Olá " + adocao.getUsuario() + " recebemos seu pedido de adoção do nosso amado " + adocao.getAnimal() + " ficamos muito felizes com seu pedido."
         + " A próxima etapa, é verificarmos se o seu perfil confiz com as necessidades do pet, em até 48h, entraremos em contato por whatsapp com um a devolutiva e caso seja positiva, marcaremos uma entrevista e o link da sala será enviado por email. Muito obrigado e até já!");
         emailService.sendEmail(email);
         return adocaoRepository.save(adocao);

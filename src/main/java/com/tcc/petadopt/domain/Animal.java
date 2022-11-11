@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -40,7 +42,8 @@ public class Animal {
     private String raca;
 
     private Boolean vermifugado;
-
+    
+    @JsonIgnore
     @OneToOne(mappedBy = "animal")
     private Adocao adocao;
 

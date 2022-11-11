@@ -35,7 +35,8 @@ public class UsuarioController {
     @GetMapping("{id}")
     public Usuario getById(@PathVariable Integer id) throws Exception{
         return usuarioRepository.findById(id).orElseThrow(() -> new Exception("Não foi possível obter usuário"));
-    }
+
+	}
 
     @PostMapping
     public Usuario save(@RequestBody UsuarioPostDTO dto){

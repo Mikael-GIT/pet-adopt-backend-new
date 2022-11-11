@@ -11,6 +11,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
 @Entity
@@ -71,6 +74,7 @@ public class Usuario {
     @Embedded
     private Endereco endereco;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "usuario")
     private Adocao adocao;
 

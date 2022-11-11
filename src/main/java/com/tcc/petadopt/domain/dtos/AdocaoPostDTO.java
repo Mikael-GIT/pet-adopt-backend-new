@@ -25,7 +25,7 @@ public class AdocaoPostDTO {
 
     public Adocao toModel(AdocaoPostDTO dto, AnimalRepository animalRepository, UsuarioRepository usuarioRepository) throws Exception{
         Animal animalFromDataBase = animalRepository.findById(dto.getAnimal_id()).orElseThrow(() -> new Exception("Não foi possível obter animal da base."));
-        Usuario usuarioFromDataBase = usuarioRepository.findById(dto.getAnimal_id()).orElseThrow(() -> new Exception("Não foi possível obter usuário da base."));
+        Usuario usuarioFromDataBase = usuarioRepository.findById(dto.getUsuario_id()).orElseThrow(() -> new Exception("Não foi possível obter usuário da base."));
         Adocao adocao = new Adocao();
         adocao.setAnimal(animalFromDataBase);
         adocao.setUsuario(usuarioFromDataBase);
