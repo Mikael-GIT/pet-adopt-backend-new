@@ -10,6 +10,6 @@ import com.tcc.petadopt.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<com.tcc.petadopt.domain.Usuario, Integer> {
 
-    @Query(value = "select * from usuario u where u.login = :pLogin and u.senha = :pSenha", nativeQuery = true)
-    Usuario access(@Param("pLogin") String login, @Param("pSenha") String senha);
+    @Query(value = "select * from usuario u where u.email = :pEmail and u.senha = :pSenha", nativeQuery = true)
+    Usuario access(@Param("pEmail") String email, @Param("pSenha") String senha);
 }

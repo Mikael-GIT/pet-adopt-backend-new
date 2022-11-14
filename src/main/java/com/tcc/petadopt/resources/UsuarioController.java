@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tcc.petadopt.domain.Categoria;
 import com.tcc.petadopt.domain.Usuario;
 import com.tcc.petadopt.domain.dtos.UsuarioAccessDTO;
 import com.tcc.petadopt.domain.dtos.UsuarioPostDTO;
 import com.tcc.petadopt.domain.dtos.UsuarioUpdateDTO;
 import com.tcc.petadopt.exceptions.ReturnError;
-import com.tcc.petadopt.repositories.CategoriaRepository;
 import com.tcc.petadopt.repositories.UsuarioRepository;
 
 @RestController
@@ -56,7 +54,7 @@ public class UsuarioController {
 	public ResponseEntity<Object> access(@RequestBody UsuarioAccessDTO pUsuario) {
 		Usuario usuario = new Usuario();
 		try {
-			usuario = usuarioRepository.access(pUsuario.getLogin(), pUsuario.getSenha());
+			usuario = usuarioRepository.access(pUsuario.getEmail(), pUsuario.getSenha());
 			if (usuario != null) {
 				return ResponseEntity.status(HttpStatus.OK).header("access", "true").body(usuario);
 			} else {				
