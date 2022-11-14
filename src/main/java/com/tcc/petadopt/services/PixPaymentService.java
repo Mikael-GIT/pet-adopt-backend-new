@@ -11,6 +11,7 @@ import com.mercadopago.client.payment.PaymentPayerRequest;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
+import com.tcc.petadopt.domain.Usuario;
 import com.tcc.petadopt.domain.dtos.pix.PixPaymentDTO;
 import com.tcc.petadopt.domain.dtos.pix.PixPaymentResponseDTO;
 import com.tcc.petadopt.exception.MercadoPagoException;
@@ -20,7 +21,7 @@ public class PixPaymentService {
     @Value("${mercado_pago_sample_access_token}")
     private String mercadoPagoAccessToken;
 
-    public PixPaymentResponseDTO processPayment(PixPaymentDTO pixPaymentDTO) {
+    public PixPaymentResponseDTO processPayment(PixPaymentDTO pixPaymentDTO, Usuario usuario) {
         try {
             MercadoPagoConfig.setAccessToken(mercadoPagoAccessToken);
 
@@ -33,13 +34,13 @@ public class PixPaymentService {
                     .paymentMethodId("pix")
                     .payer(
                         PaymentPayerRequest.builder()
-                            .email(pixPaymentDTO.getPayer().getEmail())
-                            .firstName(pixPaymentDTO.getPayer().getFirstName())
-                            .lastName(pixPaymentDTO.getPayer().getLastName())
+                            .email(usuario.getEmail())
+                            .firstName(usuario.getNome())
+                            .lastName(usuario.getNome())
                             .identification(
                                 IdentificationRequest.builder()
-                                    .type(pixPaymentDTO.getPayer().getIdentification().getType())
-                                    .number(pixPaymentDTO.getPayer().getIdentification().getNumber())
+                                    .type("PIX")
+                                    .number(usuario.getCpf())
                                     .build())
                             .build())
                     .build();
