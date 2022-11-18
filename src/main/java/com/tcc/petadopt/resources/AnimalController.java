@@ -35,16 +35,13 @@ public class AnimalController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
-    private MapsService mapsService;
-
-    @GetMapping("{cep}")
+    @GetMapping
     public List<Animal> getAll(@PathVariable Integer cep){
         List<Animal> animais = animalRepository.findAll();
         return animais;
     }
 
-    @GetMapping("/{id}/{cep}")
+    @GetMapping("/{id}")
     public Animal getById(@PathVariable Integer id, @PathVariable Integer cep) throws Exception{
         return animalRepository.findById(id).orElseThrow(() -> new Exception());
     }
