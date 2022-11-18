@@ -1,11 +1,6 @@
 package com.tcc.petadopt.resources;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,10 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tcc.petadopt.domain.Animal;
 import com.tcc.petadopt.domain.Categoria;
 import com.tcc.petadopt.domain.dtos.AnimalPostDTO;
-import com.tcc.petadopt.domain.dtos.RowsDTO;
 import com.tcc.petadopt.repositories.AnimalRepository;
 import com.tcc.petadopt.repositories.CategoriaRepository;
-import com.tcc.petadopt.services.MapsService;
+
 @RestController
 @RequestMapping("/animais")
 @CrossOrigin
@@ -42,7 +36,7 @@ public class AnimalController {
     }
 
     @GetMapping("/{id}")
-    public Animal getById(@PathVariable Integer id, @PathVariable Integer cep) throws Exception{
+    public Animal getById(@PathVariable Integer id) throws Exception{
         return animalRepository.findById(id).orElseThrow(() -> new Exception());
     }
 
