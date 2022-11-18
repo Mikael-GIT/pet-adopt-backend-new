@@ -42,6 +42,10 @@ public class Animal {
     private String raca;
 
     private Boolean vermifugado;
+
+    private String status;
+
+    private String distancia;
     
     @JsonIgnore
     @OneToOne(mappedBy = "animal")

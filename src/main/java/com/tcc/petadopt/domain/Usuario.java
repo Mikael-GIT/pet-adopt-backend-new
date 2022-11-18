@@ -34,6 +34,8 @@ public class Usuario {
 
     private String email;
 
+    private Boolean admin;
+
     private String senha;
 
     private String telefone;

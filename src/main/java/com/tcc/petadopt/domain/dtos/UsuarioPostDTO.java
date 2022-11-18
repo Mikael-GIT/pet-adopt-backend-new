@@ -18,6 +18,7 @@ public class UsuarioPostDTO {
     private String senha;
 
     private String telefone;
+    
 
     public Usuario toModel(UsuarioPostDTO dto){
         Usuario usuario = new Usuario();
@@ -27,6 +28,5 @@ public class UsuarioPostDTO {
         usuario.setSenha(dto.getSenha());
         usuario.setTelefone(dto.getTelefone());
         return usuario;
-        
     }
 }

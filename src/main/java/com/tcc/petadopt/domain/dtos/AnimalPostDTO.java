@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tcc.petadopt.domain.Animal;
 import com.tcc.petadopt.domain.Categoria;
+import com.tcc.petadopt.domain.Endereco;
 import com.tcc.petadopt.repositories.CategoriaRepository;
 
 import lombok.Getter;
@@ -35,6 +36,8 @@ public class AnimalPostDTO {
 
     private String raca;
 
+    private Endereco endereco;
+
     private Integer categoria_id;
 
 
@@ -50,6 +53,8 @@ public class AnimalPostDTO {
         animal.setRaca(dto.getRaca());
         animal.setVacinado(dto.getVacinado());
         animal.setVermifugado(dto.getVermifugado());
+        animal.setStatus("disponivel");
+        animal.setEndereco(dto.getEndereco());
         Categoria categoriaFromDataBase = categoriaRepository.findById(dto.getCategoria_id()).orElseThrow(() -> new Exception("Não foi possível obter categoria da base."));
         animal.setCategoria(categoriaFromDataBase);
         return animal;

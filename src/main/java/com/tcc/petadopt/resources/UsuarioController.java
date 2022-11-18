@@ -42,6 +42,13 @@ public class UsuarioController {
         return usuarioRepository.save(usuario);
     }
 
+	@PostMapping("/admin")
+    public Usuario saveAdmin(@RequestBody UsuarioPostDTO dto){
+        Usuario usuario = dto.toModel(dto);
+		usuario.setAdmin(true);
+        return usuarioRepository.save(usuario);
+    }
+
     @PutMapping
     public Usuario update(@RequestBody UsuarioUpdateDTO dto) throws Exception{
         Usuario usuario = dto.toModel(dto, usuarioRepository);
@@ -57,6 +64,30 @@ public class UsuarioController {
 			usuario = usuarioRepository.access(pUsuario.getEmail(), pUsuario.getSenha());
 			if (usuario != null) {
 				return ResponseEntity.status(HttpStatus.OK).header("access", "true").body(usuario);
+			} else {				
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).header("access", "false").body(new ReturnError(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase(), "Usuário ou senha inválida", "/api/usuario/create"));
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.header("access", "false")
+					.body(new ReturnError(HttpStatus.INTERNAL_SERVER_ERROR,
+							HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(),
+							"/api/usuario/create"));
+		}
+
+	}
+
+	@PostMapping
+	@RequestMapping("access/admin")
+	public ResponseEntity<Object> accessAdmin(@RequestBody UsuarioAccessDTO pUsuario) {
+		Usuario usuario = new Usuario();
+		try {
+			usuario = usuarioRepository.access(pUsuario.getEmail(), pUsuario.getSenha());
+			if (usuario != null) {
+				if(usuario.getAdmin()){
+					return ResponseEntity.status(HttpStatus.OK).header("access", "true").body(usuario);
+				}
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).header("access", "false").body(new ReturnError(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase(), "Usuário não possui credenciais de acesso", "/api/usuario/create"));
 			} else {				
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).header("access", "false").body(new ReturnError(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase(), "Usuário ou senha inválida", "/api/usuario/create"));
 			}

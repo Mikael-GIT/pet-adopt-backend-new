@@ -8,6 +8,6 @@ import lombok.Data;
 public class RowsDTO {
     ArrayList <Object> destination_addresses = new ArrayList <Object> ();
     ArrayList <Object> origin_addresses = new ArrayList <Object> ();
-    ArrayList <Object> rows = new ArrayList <Object> ();
+    ArrayList <RowDTO> rows = new ArrayList <RowDTO> ();
     private String status;
 }
