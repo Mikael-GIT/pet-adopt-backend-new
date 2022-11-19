@@ -37,9 +37,12 @@ public class CategoriaController {
     @GetMapping("{id}")
     public Categoria getById(@PathVariable Integer id) throws Exception{
         Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new Exception("Não foi possível recuperar dados"));
+        
         categoria.getAnimais().forEach(animal -> { 
+            if(animal.getEndereco() != null){
             RowsDTO distances = mapsService.getDistanceBetweenCeps("26031481", Arrays.asList(animal.getEndereco().getCep()));
             animal.setDistancia(distances.getRows().get(0).getElements().get(0).getDistance().getText());
+            }
         });
         return categoria;
     }

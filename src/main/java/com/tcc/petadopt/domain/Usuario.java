@@ -1,18 +1,20 @@
 package com.tcc.petadopt.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -77,8 +79,9 @@ public class Usuario {
     private Endereco endereco;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "usuario")
-    private Adocao adocao;
+    @OneToMany
+    @JoinColumn(name = "usuario")
+    private List<Adocao> adocao;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
