@@ -20,7 +20,7 @@ import com.tcc.petadopt.domain.dtos.ZoomMeetingResponse;
 @Service
 public class ZoomService {
 
-    private String tokenJwt = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6InJLN2tBNjl4UlN5M0tkVVVEdF9zR3ciLCJleHAiOjE2Njg5ODIxOTEsImlhdCI6MTY2ODM3NzM4OH0.2YckVmqy732lxnpFDHAmMe2iD7swFn_ppjjkCQISWAI";
+    private String tokenJwt = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6InJLN2tBNjl4UlN5M0tkVVVEdF9zR3ciLCJleHAiOjE2Njk1OTgxMDAsImlhdCI6MTY2ODk5MzM2OX0.QypBqDzEWF3Ca7EdG2vls4wuVkQiBhC69CbtpZNB8iE";
 
     private final String hostEmail = "mikael.tavares@unigranrio.br";
 

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.tcc.petadopt.domain.Adocao;
 import com.tcc.petadopt.domain.Animal;
 import com.tcc.petadopt.domain.Usuario;
-import com.tcc.petadopt.repositories.AdocaoRepository;
 import com.tcc.petadopt.repositories.AnimalRepository;
 import com.tcc.petadopt.repositories.UsuarioRepository;
 
@@ -14,11 +13,13 @@ import lombok.Data;
 @Data
 public class AdocaoPostDTO {
 
-    @Autowired
+    private Integer id;
 
     private Integer animal_id;
 
     private Integer usuario_id;
+
+    private String data_entrevista;
 
     private String status;
 
